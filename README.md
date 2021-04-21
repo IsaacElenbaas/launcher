@@ -10,3 +10,27 @@ python-xcffib
 xsel for copying from calc
 ```
 Currently only works on herbstluftwm, as there is no standard X way to determine the focused monitor (that I can find), but that can be fixed by hardcoding offsets by the herbstclient call.
+
+`calc` can also be called from the command line; below is an example and its output.
+```
+./calc.py "x=12+4%3;2x^floor(dist([7,2],[3,4])/3)"
+Input: x=12+4%3;2x^floor(dist([7,2],[3,4])/3)
+Solving (top level): x=12+4%3
+Solving basic math: 12+4%3
+[4.0, '%', 3.0]
+[12.0, '+', 1.0]
+Solving (top level): 2*x^floor(dist([7,2],[3,4])/3)
+Solving basic math: [7,2],[3,4]
+Working on section: dist([7,2],[3,4])/3
+['dist([7,2],[3,4])']
+Solving basic math: 4.47213595499957961010/3
+[4.47213595499958, '/', 3.0]
+Working on section: 2*x^floor(1.49071198499985979602)
+['floor(1.49071198499985979602)']
+['x']
+After expanding vars: 2*13^1
+Solving basic math: 2*13^1
+[13.0, '^', 1.0]
+[2.0, '*', 13.0]
+26
+```
