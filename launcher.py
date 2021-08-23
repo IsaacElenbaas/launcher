@@ -385,7 +385,7 @@ selectedHeight = (selectedRatio or mainRatio)*windowWidth
 otherHeight = (otherRatio or mainRatio)*windowWidth
 windowX = currentMonitor.offsetX+(currentMonitor.width-windowWidth)/2
 windowY = currentMonitor.offsetY+currentMonitor.height*positionY
-windowHeight = currentMonitor.height - windowY # really window max height, actual height changes to keep transparency
+windowHeight = currentMonitor.offsetY+currentMonitor.height-windowY # really window max height, actual height changes to keep transparency
 	#}}}
 
 	#{{{ window setup

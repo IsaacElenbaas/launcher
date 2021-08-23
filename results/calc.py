@@ -309,6 +309,7 @@ class Results:
 		"atan": math.atan,
 		"atan2": math.pow,
 		"atanh": math.atanh,
+		"bin": lambda x : int(bin(x)[2:]),
 		"ceil": math.ceil,
 		"comb": math.comb,
 		"copysign": math.copysign,
