@@ -119,12 +119,12 @@ def updateResults(enter):
 	if not enter:
 		selected = 0
 	results = []
+	lenResults = 0
 	for resultSource in resultSources:
 		if checkEvent(False): # cancels result creation if more was typed
 			break
 		results.append(resultSource.getResults(content))
 	else:
-		lenResults = 0
 		for resultGroup in results:
 			lenResults += len(resultGroup)
 		lenResults = min(maxResults, lenResults)
@@ -285,14 +285,17 @@ class paintClass():
 		global context
 		padding = textPadding if textPadding else round(textPaddingRatio*mainHeight)
 		if result[0][-4:] == ".png": # none of the numbers in this section are what they should be but this works and that doesn't
-			imageSurface = cairo.ImageSurface.create_from_png(result[0])
-			matrix = context.get_matrix()
-			scale = (height-padding/2)/imageSurface.get_width()
-			context.scale(scale, scale)
-			context.set_source_surface(imageSurface, padding/2/scale, (y+padding/4)/scale)
-			context.paint()
-			imageSurface.finish()
-			context.set_matrix(matrix)
+			try:
+				imageSurface = cairo.ImageSurface.create_from_png(result[0])
+				matrix = context.get_matrix()
+				scale = (height-padding/2)/imageSurface.get_width()
+				context.scale(scale, scale)
+				context.set_source_surface(imageSurface, padding/2/scale, (y+padding/4)/scale)
+				context.paint()
+				imageSurface.finish()
+				context.set_matrix(matrix)
+			except FileNotFoundError:
+				pass
 			context.set_source_rgb(1, 1, 1)
 			context.set_font_size((round(height)-2*padding)*96/72)
 			context.move_to(height+padding/2, y+round(height)-padding)
